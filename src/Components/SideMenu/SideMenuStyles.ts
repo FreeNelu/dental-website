@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const MenuContainer = styled.div`
+position: absolute;
   align-items: center;
   display: flex;
   height: 100vh;

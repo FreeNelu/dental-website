@@ -6,18 +6,19 @@ import {
 } from './SideMenuStyles';
 
 interface SideMenuProps {
+    menuOpen: boolean;
     handleMouseOver: (index: number | null) => void;
     handleMouseLeave: () => void;
     menuItemHovered: boolean;
     activeIndex: number | null
 }
 
-const SideMenu: React.FC<SideMenuProps> = ({ handleMouseOver, handleMouseLeave, menuItemHovered, activeIndex }) => {
+const SideMenu: React.FC<SideMenuProps> = ({ menuOpen, handleMouseOver, handleMouseLeave, menuItemHovered, activeIndex }) => {
     const [transitioned, setTransitioned] = useState<boolean>(false);
 
     useEffect(() => {
-        setTransitioned(true);
-    }, []);
+        setTransitioned(menuOpen);
+    }, [menuOpen]);
 
     return (
         <MenuContainer>

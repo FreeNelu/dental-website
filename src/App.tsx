@@ -1,6 +1,7 @@
 import React from 'react';
 import LandingPage from './Components/LandingPage/LandingPage';
 import { BrowserRouter as Router } from 'react-router-dom';
+import TreatmentsPage from './Components/TreatmentsPage/TreatmentsPage';
 
 function App() {
   const handleScroll = () => {
@@ -14,9 +15,7 @@ function App() {
   return (
     <Router>
       <LandingPage handleScroll={handleScroll} />
-      <div style={{ height: "100vh", background: '#e5f0f9' }}>
-        Content below LandingPage
-      </div>
+      <TreatmentsPage />
     </Router>
   );
 }

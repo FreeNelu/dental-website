@@ -22,6 +22,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ handleScroll }) => {
         }
     };
 
+    const hideMenu = () => {
+        setMenuOpen(false);
+    }
+
     const handleMouseLeave = () => { setMenuItemHovered(false); }
 
     const handleMove = (e: MouseEvent | TouchEvent) => {
@@ -31,7 +35,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ handleScroll }) => {
         setLeftSideWidth(mouseX / window.innerWidth * 100)
     };
 
-    const handleMenuClick = () => {
+    const handleMenuClick = (e: any) => {
+        e.stopPropagation();
         handleMouseOver(null)
         setMenuOpen(prevMenuOpen => !prevMenuOpen);
     };
@@ -39,10 +44,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ handleScroll }) => {
     useEffect(() => {
         document.addEventListener('mousemove', handleMove);
         document.addEventListener('touchmove', handleMove);
+        document.addEventListener('click', hideMenu);
+        document.addEventListener('touchstart', hideMenu);
 
         return () => {
             document.removeEventListener('mousemove', handleMove);
             document.removeEventListener('touchmove', handleMove);
+            document.removeEventListener('click', hideMenu);
+            document.removeEventListener('touchstart', hideMenu);
         };
     }, []);
 
@@ -65,13 +74,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ handleScroll }) => {
                 </Title>
             </Side>
 
-            <Side color="#a3c3e7" width={100} transition={0} style={{ filter: `brightness(${menuItemHovered ? 0.8 : 1})`, }}>
+            <Side color="#a3c3e7" width={100} transition={0} style={{ filter: `brightness(${menuItemHovered ? 0.9 : 1})`, }}>
                 <BackgroundPattern
                     data-active-index={activeIndex} />
-                {menuOpen ? <SideMenu handleMouseOver={handleMouseOver} handleMouseLeave={handleMouseLeave} menuItemHovered={menuItemHovered} activeIndex={activeIndex} /> :
-                    <Title color="#192428">
-                        Pentru cel mai<br />frumos  <Fancy color="	#e5f0f9">zâmbet</Fancy>
-                    </Title>
+                <SideMenu menuOpen={menuOpen} handleMouseOver={handleMouseOver} handleMouseLeave={handleMouseLeave} menuItemHovered={menuItemHovered} activeIndex={activeIndex} />
+                {!menuOpen && <Title color="#192428">
+                    Pentru cel mai<br />frumos  <Fancy color="	#e5f0f9">zâmbet</Fancy>
+                </Title>
                 }
 
             </Side>
