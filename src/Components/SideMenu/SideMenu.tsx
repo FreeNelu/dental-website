@@ -22,10 +22,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ handleMouseOver, handleMouseLeave, 
     return (
         <MenuContainer>
             <MenuItemsContainer transitioned={transitioned}>
-                <MenuItem dimColor={menuItemHovered && activeIndex !== 0} onMouseOver={() => handleMouseOver(0)} onMouseLeave={() => handleMouseLeave()}>Home</MenuItem>
-                <MenuItem dimColor={menuItemHovered && activeIndex !== 1} onMouseOver={() => handleMouseOver(1)} onMouseLeave={() => handleMouseLeave()}>What?</MenuItem>
-                <MenuItem dimColor={menuItemHovered && activeIndex !== 2} onMouseOver={() => handleMouseOver(2)} onMouseLeave={() => handleMouseLeave()}>How?</MenuItem>
-                <MenuItem dimColor={menuItemHovered && activeIndex !== 3} onMouseOver={() => handleMouseOver(3)} onMouseLeave={() => handleMouseLeave()}>Where?</MenuItem>
+                <MenuItem dimColor={menuItemHovered && activeIndex !== 0} onMouseOver={() => handleMouseOver(0)} onMouseLeave={() => handleMouseLeave()}>Acasa</MenuItem>
+                <MenuItem dimColor={menuItemHovered && activeIndex !== 1} onMouseOver={() => handleMouseOver(1)} onMouseLeave={() => handleMouseLeave()}>Echipa</MenuItem>
+                <MenuItem dimColor={menuItemHovered && activeIndex !== 2} onMouseOver={() => handleMouseOver(2)} onMouseLeave={() => handleMouseLeave()}>Metode</MenuItem>
+                <MenuItem dimColor={menuItemHovered && activeIndex !== 3} onMouseOver={() => handleMouseOver(3)} onMouseLeave={() => handleMouseLeave()}>Preturi</MenuItem>
             </MenuItemsContainer>
         </MenuContainer>
     );

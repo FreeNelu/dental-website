@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Side, Title, Fancy, Header, Logo, MenuButton, BackgroundPattern, ToothIcon, LogoContainer, ToothIconShadow } from './LandingPageStyles';
+import { Container, Side, Title, Fancy, Header, Logo, MenuButton, BackgroundPattern, ToothIcon, LogoContainer, ToothIconShadow, SmileImage } from './LandingPageStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faBarsStaggered, faTooth } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faBarsStaggered, faTooth } from '@fortawesome/free-solid-svg-icons';
 import SideMenu from '../SideMenu/SideMenu';
 
-const LandingPage: React.FC = () => {
+interface LandingPageProps {
+    handleScroll: () => void;
+}
+
+const LandingPage: React.FC<LandingPageProps> = ({ handleScroll }) => {
     const [leftSideWidth, setLeftSideWidth] = useState(50);
     const [menuOpen, setMenuOpen] = useState(false);
     const [menuItemHovered, setMenuItemHovered] = useState(false);
@@ -21,6 +25,8 @@ const LandingPage: React.FC = () => {
     const handleMouseLeave = () => { setMenuItemHovered(false); }
 
     const handleMove = (e: MouseEvent | TouchEvent) => {
+        const mouseY = e instanceof MouseEvent ? e.clientY + window.scrollY : e.touches[0].clientY + window.scrollY;
+        if (mouseY > window.innerHeight) return
         const mouseX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
         setLeftSideWidth(mouseX / window.innerWidth * 100)
     };
@@ -41,39 +47,39 @@ const LandingPage: React.FC = () => {
     }, []);
 
     return (
-        <>
-            <Container>
-                <Header>
-                    <LogoContainer>
-                        <ToothIcon icon={faTooth} />
-                        <ToothIconShadow icon={faTooth} />
-                        <Logo color="#ffffff">Holici Clinic</Logo>
-                    </LogoContainer>
-                    <MenuButton onClick={handleMenuClick}>
-                        <FontAwesomeIcon icon={faBarsStaggered} />
-                    </MenuButton>
-                </Header>
-                <Side color="#192428" transition={1} width={menuOpen ? 36 : Math.min(Math.max(36, leftSideWidth), 65)} style={{ zIndex: 2 }}>
-                    <Title color="#ffffff">
-                        Oferim cel mai<br />bun <Fancy color="#a3c3e7">tratament</Fancy>
+        <Container>
+            <Header>
+                <LogoContainer>
+                    <ToothIcon icon={faTooth} />
+                    <ToothIconShadow icon={faTooth} />
+                    <Logo color="#e5f0f9">Holici Clinic</Logo>
+                </LogoContainer>
+                <MenuButton onClick={handleMenuClick}>
+                    <FontAwesomeIcon icon={faBarsStaggered} />
+                </MenuButton>
+            </Header>
+
+            <Side color="#192428" transition={1} width={menuOpen ? 36 : Math.min(Math.max(36, leftSideWidth), 65)} style={{ zIndex: 2 }}>
+                <Title color="#e5f0f9">
+                    Oferim cel mai<br />bun <Fancy color="#a3c3e7">tratament</Fancy>
+                </Title>
+            </Side>
+
+            <Side color="#a3c3e7" width={100} transition={0} style={{ filter: `brightness(${menuItemHovered ? 0.8 : 1})`, }}>
+                <BackgroundPattern
+                    data-active-index={activeIndex} />
+                {menuOpen ? <SideMenu handleMouseOver={handleMouseOver} handleMouseLeave={handleMouseLeave} menuItemHovered={menuItemHovered} activeIndex={activeIndex} /> :
+                    <Title color="#192428">
+                        Pentru cel mai<br />frumos  <Fancy color="	#e5f0f9">zâmbet</Fancy>
                     </Title>
+                }
 
-                </Side>
-                <Side color="#a3c3e7" width={100} transition={0} style={{ filter: `brightness(${menuItemHovered ? 0.8 : 1})`, }}>
-                    <BackgroundPattern
-                        data-active-index={activeIndex} />
+            </Side>
 
-                    {menuOpen ? <SideMenu handleMouseOver={handleMouseOver} handleMouseLeave={handleMouseLeave} menuItemHovered={menuItemHovered} activeIndex={activeIndex} /> :
-                        <Title color="#192428">
-                            Pentru cel mai<br />frumos  <Fancy color="	#ffffff">zâmbet</Fancy>
-                        </Title>
-                    }
-                    <MenuButton onClick={handleMenuClick} style={{ transition: "right 0.5s ease-in-out, opacity 0.75s ease-in-out", position: 'absolute', right: menuOpen ? '20vw' : "10vw", top: '50%', zIndex: 99, opacity: menuOpen ? "0" : "1" }} >
-                        <FontAwesomeIcon icon={faAngleRight} beat size="xl" />
-                    </MenuButton>
-                </Side>
-            </Container >
-        </>
+            <MenuButton onClick={handleScroll} style={{ color: '#e5f0f9', transition: "opacity 0.75s ease-in-out", position: 'absolute', right: "50%", top: '80%', zIndex: 99, opacity: menuOpen ? "0" : "1" }} >
+                <FontAwesomeIcon icon={faAngleDown} beat size="xl" />
+            </MenuButton>
+        </Container >
     );
 };
 

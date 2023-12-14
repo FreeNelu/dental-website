@@ -6,6 +6,13 @@ export const Container = styled.div`
   height: 100vh;
 `;
 
+export const SmileImage = styled.img`
+  width: 400px;
+  margin-top: 4vh;
+  border-radius: 8px;
+  opacity: 1
+`;
+
 export const BackgroundPattern = styled.div`
   background-image: radial-gradient(
     rgba(255, 255, 255, 0.35) 2.5%, 
@@ -72,7 +79,7 @@ export const LogoContainer = styled.div`
 `;
 
 export const ToothIcon = styled(FontAwesomeIcon)`
-  color: #ffffff;
+  color: #e5f0f9;
   font-size: 3rem;
   z-index: 1;
 `;
