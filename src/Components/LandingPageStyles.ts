@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
 `;
 
-export const Side = styled.div<{ color: string; width: number }>`
+export const Side = styled.div<{ color: string; width: number, transition: number }>`
   display: grid;
   height: 100vh;
   overflow: hidden;
@@ -13,6 +13,9 @@ export const Side = styled.div<{ color: string; width: number }>`
   text-align: center;
   width: ${props => props.width}%;
   background-color: ${props => props.color};
+  transition: width ${props => props.transition}s cubic-bezier(0.23, 1, 0.32, 1);
+
+
 `;
 
 export const Title = styled.h2`

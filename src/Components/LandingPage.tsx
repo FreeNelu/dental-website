@@ -8,7 +8,6 @@ const LandingPage: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const handleMove = (e: MouseEvent | TouchEvent) => {
-        if (menuOpen) return;
         const mouseX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
         setLeftSideWidth(mouseX / window.innerWidth * 100)
     };
@@ -36,17 +35,19 @@ const LandingPage: React.FC = () => {
                         <FontAwesomeIcon icon={faBarsStaggered} />
                     </MenuButton>
                 </Header>
-                <Side color="#192428" width={Math.min(Math.max(36, leftSideWidth), 65)} style={{ zIndex: 2 }}>
+                <Side color="#192428" transition={0.5} width={menuOpen ? 36 : Math.min(Math.max(36, leftSideWidth), 65)} style={{ zIndex: 2 }}>
                     <Title color="#ffffff">
                         Oferim cel mai<br />bun <Fancy color="#a3c3e7">tratament</Fancy>
                     </Title>
+
                 </Side>
-                <Side color="#a3c3e7" width={100}>
-                    <Title color="#192428">
+                <Side color="#a3c3e7" width={100} transition={0}>
+                    {!menuOpen && <Title color="#192428">
                         Pentru cel mai<br />frumos  <Fancy color="	#ffffff">zâmbet</Fancy>
                     </Title>
+                    }
                 </Side>
-            </Container>
+            </Container >
         </>
     );
 };
