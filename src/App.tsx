@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import LandingPage from './Components/LandingPage';
+import LandingPage from './Components/LandingPage/LandingPage';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
